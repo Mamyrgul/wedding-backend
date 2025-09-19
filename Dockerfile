@@ -1,14 +1,14 @@
-# Используем OpenJDK 17
-FROM eclipse-temurin:17-jdk
+# Используем Java 17
+FROM eclipse-temurin:17-jdk-alpine
 
-# Создаём рабочую директорию
+# Рабочая директория в контейнере
 WORKDIR /app
 
-# Копируем jar файл в контейнер
-COPY build/libs/*.jar app.jar
+# Копируем JAR в контейнер
+COPY build/libs/wedding-0.0.1-SNAPSHOT.jar app.jar
 
-# Открываем порт
+# Открываем порт, который использует Spring Boot
 EXPOSE 8989
 
-# Команда запуска
-ENTRYPOINT ["java","-jar","app.jar"]
+# Запускаем приложение
+ENTRYPOINT ["java", "-jar", "app.jar"]
