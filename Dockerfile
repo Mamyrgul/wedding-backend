@@ -1,27 +1,14 @@
-# Используем Java 17 с Gradle
-FROM gradle:7.6.1-jdk17-alpine AS build
-
-# Рабочая директория внутри контейнера
-WORKDIR /app
-
-# Копируем файлы проекта
-COPY . .
-
-# Сборка JAR
-RUN gradle clean build --no-daemon
-
-# ---------------------------------------------------
-
-# Новый контейнер для запуска приложения (легкий)
+# Используем Java 17
 FROM eclipse-temurin:17-jdk-alpine
 
+# Рабочая директория в контейнере
 WORKDIR /app
 
-# Копируем JAR из предыдущего контейнера
-COPY --from=build /app/build/libs/wedding-0.0.1-SNAPSHOT.jar app.jar
+# Копируем JAR в контейнер
+COPY build/libs/wedding-0.0.1-SNAPSHOT.jar app.jar
 
-# Открываем порт Spring Boot
+# Открываем порт, который использует Spring Boot
 EXPOSE 8989
 
-# Запуск приложения
+# Запускаем приложение
 ENTRYPOINT ["java", "-jar", "app.jar"]
