@@ -12,6 +12,7 @@ services:
       - "5432:5432"
     volumes:
       - wedding-data:/var/lib/postgresql/data
+    restart: unless-stopped
 
   backend:
     build: .
@@ -24,6 +25,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/wedding
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1234
+    restart: unless-stopped
 
 volumes:
   wedding-data:
