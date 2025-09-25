@@ -8,7 +8,7 @@ WORKDIR /app
 COPY build/libs/wedding-0.0.1-SNAPSHOT.jar app.jar
 
 # Открываем порт, который использует Spring Boot
-EXPOSE 8989
+EXPOSE 8080
 
 # Запускаем приложение
 ENTRYPOINT ["java", "-jar", "app.jar"]
